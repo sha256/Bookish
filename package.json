@@ -1,0 +1,22 @@
+{
+  "name": "bookish",
+  "version": "0.1.0",
+  "description": "ePub editor using Electron",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sha256/Bookish.git"
+  },
+  "author": "Shamim Hasnath",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sha256/Bookish/issues"
+  },
+  "homepage": "https://github.com/sha256/Bookish#readme",
+  "dependencies": {
+    "jszip": "^3.1.2"
+  }
+}
