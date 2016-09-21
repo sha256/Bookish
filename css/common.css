@@ -1,0 +1,44 @@
+/**
+    jsTree fixes
+*/
+
+li > .jstree-ocl:before {
+  position: relative;
+  display: inline-block;
+  font-family: "photon-entypo";
+  font-size: 100%;
+  line-height: 100%;
+}
+
+i.jstree-ocl {
+    font-style: normal;
+    font-weight: bold;
+}
+
+li.jstree-open > .jstree-ocl:before {
+  content: '\e873';
+}
+
+li.jstree-closed > .jstree-ocl:before {
+  content: '\e875';
+}
+
+.jstree-default .jstree-node, .jstree-default .jstree-icon {
+    background: none !important;
+}
+
+.jstree-container-ul {
+    font-size: 17px;
+}
+
+.jstree-default .jstree-wholerow-clicked {
+    background: #d4d2d4; !important;
+}
+
+.jstree-default .jstree-wholerow-hovered {
+    background: rgba(94, 94, 94, 0.13); !important;
+}
+
+.jstree-default .jstree-wholerow-clicked {
+    background: #d4d2d4; !important;
+}

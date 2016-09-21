@@ -1,5 +1,6 @@
 {
   "name": "bookish",
+  "productName": "Bookish",
   "version": "0.1.0",
   "description": "ePub editor using Electron",
   "main": "main.js",
@@ -17,6 +18,7 @@
   },
   "homepage": "https://github.com/sha256/Bookish#readme",
   "dependencies": {
-    "adm-zip": "^0.4.7"
+    "adm-zip": "^0.4.7",
+    "jstree": "^3.3.2"
   }
 }

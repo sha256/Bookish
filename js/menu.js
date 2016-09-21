@@ -115,7 +115,7 @@ const template = [
 if (process.platform === 'darwin') {
     const name = require('electron').app.getName();
     template.unshift({
-        label: name,
+        label: 'Bookish',
         submenu: [
             {
                 role: 'about'

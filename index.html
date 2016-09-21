@@ -1,255 +1,95 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Photon</title>
-
+<head>
+    <title>Bookish</title>
     <link rel="stylesheet" href="vendor/photon/css/photon.css">
-    <link rel="stylesheet" href="css/dir-tree.css">
 
-  </head>
-  <body>
-    <div class="window">
+    <link rel="stylesheet" href="node_modules/jstree/dist/themes/default/style.css">
+    <link rel="stylesheet" href="css/common.css">
 
-      <!-- .toolbar-header sits at the top of your app -->
-      <header class="toolbar toolbar-header">
-        <h1 class="title">Photon</h1>
-      </header>
+    <script type="text/javascript" src="js/config.js"></script>
 
-      <!-- Your app's content goes inside .window-content -->
-      <div class="window-content">
+</head>
+<body>
+<div class="window">
+
+    <!-- .toolbar-header sits at the top of your app -->
+    <!--<header class="toolbar toolbar-header">-->
+    <!--<h1 class="title">Photon</h1>-->
+    <!--</header>-->
+
+    <!-- Your app's content goes inside .window-content -->
+    <div class="window-content">
         <div class="pane-group">
-          <div class="pane pane-sm sidebar dir-tree">
-            <ol class="tree">
-		<li>
-			<label for="folder1">Folder 1</label> <input type="checkbox" checked disabled id="folder1" />
-			<ol>
-				<li class="file"><a href="document.html.pdf">File 1</a></li>
-				<li>
-					<label for="subfolder1">Subfolder 1</label> <input type="checkbox" id="subfolder1" />
-					<ol>
-						<li class="file"><a href="">Filey 1</a></li>
-						<li>
-							<label for="subsubfolder1">Subfolder 1</label> <input type="checkbox" id="subsubfolder1" />
-							<ol>
-								<li class="file"><a href="">File 1</a></li>
-								<li>
-									<label for="subsubfolder2">Subfolder 1</label> <input type="checkbox" id="subsubfolder2" />
-									<ol>
-										<li class="file"><a href="">Subfile 1</a></li>
-										<li class="file"><a href="">Subfile 2</a></li>
-										<li class="file"><a href="">Subfile 3</a></li>
-										<li class="file"><a href="">Subfile 4</a></li>
-										<li class="file"><a href="">Subfile 5</a></li>
-										<li class="file"><a href="">Subfile 6</a></li>
-									</ol>
-								</li>
-							</ol>
-						</li>
-						<li class="file"><a href="">File 3</a></li>
-						<li class="file"><a href="">File 4</a></li>
-						<li class="file"><a href="">File 5</a></li>
-						<li class="file"><a href="">File 6</a></li>
-					</ol>
-				</li>
-			</ol>
-		</li>
-		<li>
-			<label for="folder2">Folder 2</label> <input type="checkbox" id="folder2" />
-			<ol>
-				<li class="file"><a href="">File 1</a></li>
-				<li>
-					<label for="subfolder2">Subfolder 1</label> <input type="checkbox" id="subfolder2" />
-					<ol>
-						<li class="file"><a href="">Subfile 1</a></li>
-						<li class="file"><a href="">Subfile 2</a></li>
-						<li class="file"><a href="">Subfile 3</a></li>
-						<li class="file"><a href="">Subfile 4</a></li>
-						<li class="file"><a href="">Subfile 5</a></li>
-						<li class="file"><a href="">Subfile 6</a></li>
-					</ol>
-				</li>
-			</ol>
-		</li>
-		<li>
-			<label for="folder3">Folder 3</label> <input type="checkbox" id="folder3" />
-			<ol>
-				<li class="file"><a href="">File 1</a></li>
-				<li>
-					<label for="subfolder3">Subfolder 1</label> <input type="checkbox" id="subfolder3" />
-					<ol>
-						<li class="file"><a href="">Subfile 1</a></li>
-						<li class="file"><a href="">Subfile 2</a></li>
-						<li class="file"><a href="">Subfile 3</a></li>
-						<li class="file"><a href="">Subfile 4</a></li>
-						<li class="file"><a href="">Subfile 5</a></li>
-						<li class="file"><a href="">Subfile 6</a></li>
-					</ol>
-				</li>
-			</ol>
-		</li>
-		<li>
-			<label for="folder4">Folder 4</label> <input type="checkbox" id="folder4" />
-			<ol>
-				<li class="file"><a href="">File 1</a></li>
-				<li>
-					<label for="subfolder4">Subfolder 1</label> <input type="checkbox" id="subfolder4" />
-					<ol>
-						<li class="file"><a href="">Subfile 1</a></li>
-						<li class="file"><a href="">Subfile 2</a></li>
-						<li class="file"><a href="">Subfile 3</a></li>
-						<li class="file"><a href="">Subfile 4</a></li>
-						<li class="file"><a href="">Subfile 5</a></li>
-						<li class="file"><a href="">Subfile 6</a></li>
-					</ol>
-				</li>
-			</ol>
-		</li>
-		<li>
-			<label for="folder5">Folder 5</label> <input type="checkbox" id="folder5" />
-			<ol>
-				<li class="file"><a href="">File 1</a></li>
-				<li>
-					<label for="subfolder5">Subfolder 1</label> <input type="checkbox" id="subfolder5" />
-					<ol>
-						<li class="file"><a href="">Subfile 1</a></li>
-						<li class="file"><a href="">Subfile 2</a></li>
-						<li class="file"><a href="">Subfile 3</a></li>
-						<li class="file"><a href="">Subfile 4</a></li>
-						<li class="file"><a href="">Subfile 5</a></li>
-						<li class="file"><a href="">Subfile 6</a></li>
-					</ol>
-				</li>
-			</ol>
-		</li>
-	</ol>
+            <div class="pane pane-sm sidebar">
+                <div id="jstree_demo">
 
-          </div>
+                </div>
+            </div>
 
-          <div class="pane">
-            <table class="table-striped">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Kind</th>
-                  <th>Date Modified</th>
-                  <th>Author</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>bars.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>base.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>button-groups.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>buttons.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>docs.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>forms.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>grid.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>icons.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>images.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>lists.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>mixins.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>navs.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>normalize.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>photon.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>tables.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>tabs.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>utilities.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-                <tr>
-                  <td>variables.scss</td>
-                  <td>Document</td>
-                  <td>Oct 13, 2015</td>
-                  <td>connors</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+            <div class="pane">
+            <textarea id="editor"></textarea>
+            </div>
         </div>
-      </div>
+    </div>
 
-      </div>
-  </body>
+</div>
+<script type="text/javascript">
+
+    window.CKEDITOR_BASEPATH = 'node_modules/ckeditor/';
+
+    var $ = require('jquery'); require('jstree'); require('ckeditor');
+
+    CKEDITOR.plugins.addExternal('codemirror', '../../vendor/codemirror/');
+
+    CKEDITOR.replace('editor', {
+        extraPlugins: 'codemirror'
+    });
+
+    $('#jstree_demo').jstree({
+        "core": {
+            "animation": 0,
+            "check_callback": true,
+            "themes": {},
+            'data': [
+                'Simple root node',
+                {
+                    'text': 'Root node 2',
+                    'state': {
+                        'opened': true,
+                        'selected': true
+                    },
+                    'children': [
+                        {'text': 'Child 1', type: 'file'},
+                        'Child 2'
+                    ]
+                }
+            ]
+        },
+        "types": {
+            "#": {
+                "max_children": 1,
+                "valid_children": ["root"]
+            },
+            "root": {
+                "icon": "40px.png",
+                "valid_children": ["default"]
+            },
+            "default": {
+                "valid_children": ["default", "file"],
+                icon: 'icon icon-folder'
+            },
+            "file": {
+                "icon": "icon icon-doc-text-inv",
+                "valid_children": []
+            }
+        },
+        "plugins": [
+            "contextmenu", "dnd", "search",
+            "state", "types", "wholerow", 'sort'
+        ]
+    });
+
+</script>
+</body>
 </html>
