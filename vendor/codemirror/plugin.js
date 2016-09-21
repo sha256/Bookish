@@ -9,10 +9,9 @@
 (function() {
     CKEDITOR.plugins.add('codemirror', {
         icons: 'searchcode,autoformat,commentselectedrange,uncommentselectedrange,autocomplete', // %REMOVE_LINE_CORE%
-        //lang: 'af,ar,bg,bn,bs,ca,cs,cy,da,de,el,en-au,en-ca,en-gb,en,eo,es,et,eu,fa,fi,fo,fr-ca,fr,gl,gu,he,hi,hr,hu,is,it,ja,ka,km,ko,ku,lt,lv,mk,mn,ms,nb,nl,no,pl,pt-br,pt,ro,ru,sk,sl,sr-latn,sr,sv,th,tr,ug,uk,vi,zh-cn,zh', // %REMOVE_LINE_CORE%
         version: 1.14,
         init: function (editor) {
-            var rootPath = this.path,
+            var rootPath = "node_modules/codemirror/",
                 defaultConfig = {
                     autoCloseBrackets: true,
                     autoCloseTags: true,
@@ -42,7 +41,14 @@
             
             // Get Config & Lang
             var config = CKEDITOR.tools.extend(defaultConfig, editor.config.codemirror || {}, true),
-                lang = editor.lang.codemirror;
+                lang = {
+                    toolbar: 'Source',
+                    searchCode: 'Search Source',
+                    autoFormat: 'Format Selection',
+                    commentSelectedRange: 'Comment Selection',
+                    uncommentSelectedRange: 'Uncomment Selection',
+                    autoCompleteToggle: 'Enable/Disable HTML Tag Autocomplete'
+                };
             
             // check for old config settings for legacy support
             if (editor.config.codemirror_theme) {
@@ -188,8 +194,8 @@
                             // Load the content
                             this.setValueOf('main', 'data', oldData = editor.getData());
 
-                            if (!IsStyleSheetAlreadyLoaded(rootPath + 'css/codemirror.min.css')) {
-                                CKEDITOR.document.appendStyleSheet(rootPath + 'css/codemirror.min.css');
+                            if (!IsStyleSheetAlreadyLoaded(rootPath + 'lib/codemirror.css')) {
+                                CKEDITOR.document.appendStyleSheet(rootPath + 'lib/codemirror.css');
                             }
 
                             if (config.theme.length && config.theme != 'default' && !IsStyleSheetAlreadyLoaded(rootPath + 'theme/' + config.theme + '.css')) {
@@ -198,7 +204,7 @@
 
                             if (typeof (CodeMirror) == 'undefined') {
 
-                                CKEDITOR.scriptLoader.load(rootPath + 'js/codemirror.min.js', function() {
+                                CKEDITOR.scriptLoader.load(rootPath + 'lib/codemirror.js', function() {
 
                                     CKEDITOR.scriptLoader.load(getCodeMirrorScripts(), function() {
                                         loadCodeMirrorInline(editor, textArea);
@@ -523,8 +529,9 @@
             }
 
             editor.addMode('source', function (callback) {
-                if (!IsStyleSheetAlreadyLoaded(rootPath + 'css/codemirror.min.css')) {
-                    CKEDITOR.document.appendStyleSheet(rootPath + 'css/codemirror.min.css');
+
+                if (!IsStyleSheetAlreadyLoaded(rootPath + 'lib/codemirror.css')) {
+                    CKEDITOR.document.appendStyleSheet(rootPath + 'lib/codemirror.css');
                 }
 
                 if (config.theme.length && config.theme != 'default' && !IsStyleSheetAlreadyLoaded(rootPath + 'theme/' + config.theme + '.css')) {
@@ -533,7 +540,7 @@
 
                 if (typeof (CodeMirror) == 'undefined') {
 
-                    CKEDITOR.scriptLoader.load(rootPath + 'js/codemirror.min.js', function() {
+                    CKEDITOR.scriptLoader.load(rootPath + 'lib/codemirror.js', function() {
 
                         CKEDITOR.scriptLoader.load(getCodeMirrorScripts(), function() {
                             loadCodeMirror(editor);
@@ -555,55 +562,56 @@
             });
 
             function getCodeMirrorScripts() {
-                var scriptFiles = [rootPath + 'js/codemirror.addons.min.js'];
+                var cmBuildPath = "build/js/codemirror/";
+                var scriptFiles = [cmBuildPath + 'codemirror.addons.min.js'];
 
                 switch (config.mode) {
                 case "bbcode":
                     {
-                        scriptFiles.push(rootPath + 'js/codemirror.mode.bbcode.min.js');
+                        scriptFiles.push(cmBuildPath + 'codemirror.mode.bbcode.min.js');
                     }
 
                     break;
                 case "bbcodemixed":
                         {
-                            scriptFiles.push(rootPath + 'js/codemirror.mode.bbcodemixed.min.js');
+                            scriptFiles.push(cmBuildPath + 'codemirror.mode.bbcodemixed.min.js');
                         }
 
                         break;
                 case "htmlmixed":
                     {
-                        scriptFiles.push(rootPath + 'js/codemirror.mode.htmlmixed.min.js');
+                        scriptFiles.push(cmBuildPath + 'codemirror.mode.htmlmixed.min.js');
                     }
 
                     break;
                 case "text/html":
                     {
-                        scriptFiles.push(rootPath + 'js/codemirror.mode.htmlmixed.min.js');
+                        scriptFiles.push(cmBuildPath + 'codemirror.mode.htmlmixed.min.js');
                     }
 
                     break;
                 case "application/x-httpd-php":
                     {
-                        scriptFiles.push(rootPath + 'js/codemirror.mode.php.min.js');
+                        scriptFiles.push(cmBuildPath + 'codemirror.mode.php.min.js');
                     }
 
                     break;
                 case "text/javascript":
                     {
-                        scriptFiles.push(rootPath + 'js/codemirror.mode.javascript.min.js');
+                        scriptFiles.push(cmBuildPath + 'codemirror.mode.javascript.min.js');
                     }
 
                     break;
                 default:
-                    scriptFiles.push(rootPath + 'js/codemirror.mode.htmlmixed.min.js');
+                    scriptFiles.push(cmBuildPath + 'codemirror.mode.htmlmixed.min.js');
                 }
 
                 if (config.useBeautify) {
-                    scriptFiles.push(rootPath + 'js/beautify.min.js');
+                    scriptFiles.push(cmBuildPath + 'beautify.min.js');
                 }
 
                 if (config.enableSearchTools) {
-                    scriptFiles.push(rootPath + 'js/codemirror.addons.search.min.js');
+                    scriptFiles.push(cmBuildPath + 'js/codemirror.addons.search.min.js');
                 }
                 return scriptFiles;
             }
@@ -796,7 +804,7 @@
             editor.addCommand('source', sourcearea.commands.source);
             if (editor.ui.addButton) {
                 editor.ui.addButton('Source', {
-                    label: editor.lang.codemirror.toolbar,
+                    label: lang.toolbar,
                     command: 'source',
                     toolbar: 'mode,10'
                 });

@@ -42,3 +42,21 @@ li.jstree-closed > .jstree-ocl:before {
 .jstree-default .jstree-wholerow-clicked {
     background: #d4d2d4; !important;
 }
+
+/***
+CK Editor
+*/
+
+#cke_editor {
+    height: 100%;
+}
+
+#cke_editor .cke_inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#cke_1_contents {
+    flex-grow: 1;
+}
