@@ -611,7 +611,7 @@
                 }
 
                 if (config.enableSearchTools) {
-                    scriptFiles.push(cmBuildPath + 'js/codemirror.addons.search.min.js');
+                    scriptFiles.push(cmBuildPath + 'codemirror.addons.search.min.js');
                 }
                 return scriptFiles;
             }

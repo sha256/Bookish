@@ -44,7 +44,7 @@ li.jstree-closed > .jstree-ocl:before {
 }
 
 /***
-CK Editor
+    CK Editor
 */
 
 #cke_editor {
@@ -59,4 +59,12 @@ CK Editor
 
 #cke_1_contents {
     flex-grow: 1;
+}
+
+#cke_1_resizer {
+    display: none;
+}
+
+#main-pane {
+    overflow-y: hidden;
 }

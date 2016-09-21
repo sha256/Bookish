@@ -27,8 +27,8 @@
                 </div>
             </div>
 
-            <div class="pane">
-            <textarea id="editor"></textarea>
+            <div class="pane" id="main-pane">
+                <textarea id="editor"></textarea>
             </div>
         </div>
     </div>
@@ -38,7 +38,9 @@
 
     window.CKEDITOR_BASEPATH = 'node_modules/ckeditor/';
 
-    var $ = require('jquery'); require('jstree'); require('ckeditor');
+    var $ = require('jquery');
+    var jstree = require('jstree');
+    var ckeditor = require('ckeditor');
 
     CKEDITOR.plugins.addExternal('codemirror', '../../vendor/codemirror/');
 
