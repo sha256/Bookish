@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/sha256/Bookish#readme",
   "dependencies": {
-    "adm-zip": "^0.4.7"
+    "adm-zip": "^0.4.7",
+    "ckeditor": "^4.5.11",
+    "codemirror": "^5.19.0"
   }
 }
