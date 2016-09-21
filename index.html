@@ -42,10 +42,15 @@
     var jstree = require('jstree');
     var ckeditor = require('ckeditor');
 
+    CKEDITOR.editorConfig = function (config) {
+
+    };
+
     CKEDITOR.plugins.addExternal('codemirror', '../../vendor/codemirror/');
 
     CKEDITOR.replace('editor', {
         extraPlugins: 'codemirror',
+        customConfig: ""
     });
 
     $('#jstree_demo').jstree({

@@ -20,7 +20,7 @@
   "dependencies": {
     "adm-zip": "^0.4.7",
     "ckeditor": "^4.5.11",
-    "codemirror": "^5.19.0",
+    "codemirror": "5.18.2",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-uglify": "^2.0.0",

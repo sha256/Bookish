@@ -58,10 +58,10 @@
                 config.autoFormatOnStart = editor.config.codemirror_autoFormatOnStart;
             }
 
-            // automatically switch to bbcode mode if bbcode plugin is enabled
-            if (editor.plugins.bbcode && config.mode.indexOf("bbcode") <= 0) {
-                config.mode = "bbcode";
-            }
+            //// automatically switch to bbcode mode if bbcode plugin is enabled
+            //if (editor.plugins.bbcode && config.mode.indexOf("bbcode") <= 0) {
+            //    config.mode = "bbcode";
+            //}
 
             // Source mode isn't available in inline mode yet.
             if (editor.elementMode === CKEDITOR.ELEMENT_MODE_INLINE || editor.plugins.sourcedialog) {
@@ -566,7 +566,7 @@
                 var scriptFiles = [cmBuildPath + 'codemirror.addons.min.js'];
 
                 switch (config.mode) {
-                case "bbcode":
+                /*case "bbcode":
                     {
                         scriptFiles.push(cmBuildPath + 'codemirror.mode.bbcode.min.js');
                     }
@@ -577,7 +577,7 @@
                             scriptFiles.push(cmBuildPath + 'codemirror.mode.bbcodemixed.min.js');
                         }
 
-                        break;
+                        break;*/
                 case "htmlmixed":
                     {
                         scriptFiles.push(cmBuildPath + 'codemirror.mode.htmlmixed.min.js');
@@ -1084,6 +1084,9 @@ CKEDITOR.plugins.sourcearea = {
             editorFocus: false,
             readOnly: 0,
             exec: function(editor) {
+
+                console.log(window["codemirror_" + editor.id]);
+
                 var range = {
                     from: window["codemirror_" + editor.id].getCursor(true),
                     to: window["codemirror_" + editor.id].getCursor(false)
