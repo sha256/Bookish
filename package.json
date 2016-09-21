@@ -1,5 +1,6 @@
 {
   "name": "bookish",
+  "productName": "Bookish",
   "version": "0.1.0",
   "description": "ePub editor using Electron",
   "main": "main.js",
@@ -19,6 +20,7 @@
   "dependencies": {
     "adm-zip": "^0.4.7",
     "ckeditor": "^4.5.11",
-    "codemirror": "^5.19.0"
+    "codemirror": "^5.19.0",
+    "jstree": "^3.3.2"
   }
 }
