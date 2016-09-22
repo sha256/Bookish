@@ -4,7 +4,7 @@ var gulp  = require('gulp'),
     uglify = require('gulp-uglify');
 
 
-var codeMirrorBuildConfig = require('./js/code_mirror_build_config.js');
+var codeMirrorBuildConfig = require('./tools/code_mirror_build_config.js');
 
 gulp.task('clean', function () {
     return del('static/build/pms/**/*.*');

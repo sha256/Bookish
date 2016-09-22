@@ -73,7 +73,30 @@ li.jstree-closed > .jstree-ocl:before {
     flex-grow: 1;
 }
 
-
 .cke_dialog tr:active, .cke_dialog .table-striped tr:active:nth-child(even){
     background: none;
+}
+
+#loader {
+    justify-content: center;
+    align-items: center;
+}
+
+#loader > div {
+    width: 80%;
+    height: 20px;
+    background: #d0d0d0;
+}
+#loader-bar {
+    height: 20px;
+    width: 0;
+    background: cornflowerblue;
+}
+
+.splitter {
+  flex: 0 0 auto;
+  width: 5px;
+  background: url('../node_modules/jquery-resizable-dom/assets/vsizegrip.png') center center no-repeat #535353;
+  min-height: 200px;
+  cursor: col-resize;
 }

@@ -10,7 +10,8 @@ const template = [
                     require('electron').dialog.showOpenDialog({
                         properties: ['openFile', 'openDirectory']
                     }, function (files) {
-                        if (files) event.sender.send('selected-directory', files)
+                        if (files)
+                            windowRef.webContents.send('file-opened', files)
                     });
 
 
@@ -190,8 +191,17 @@ if (process.platform === 'darwin') {
     ]
 }
 
-module.exports = function () {
-    const {Menu} = require('electron');
-    const menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
+var windowRef;
+
+module.exports = {
+
+    init: function(){
+        const {Menu} = require('electron');
+        const menu = Menu.buildFromTemplate(template);
+        Menu.setApplicationMenu(menu);
+    },
+    setWindow: function(win){
+        windowRef = win;
+    }
+
 };

@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="vendor/photon/css/photon.css">
 
     <link rel="stylesheet" href="node_modules/jstree/dist/themes/default/style.css">
+    <link rel="stylesheet" href="css/scrollbars.css">
     <link rel="stylesheet" href="css/common.css">
 
 </head>
@@ -20,12 +21,11 @@
 
     <div class="window-content">
         <div class="pane-group">
-            <div class="pane pane-sm sidebar">
-                <div id="jstree_demo">
+            <div class="pane pane-sm sidebar" id="sidebar">
+                <div id="fileBrowserTree">
 
                 </div>
             </div>
-
             <div class="pane" id="main-pane">
                 <div class="tab-group">
                     <div class="tab-item">
@@ -65,64 +65,41 @@
     </div>
 
 </div>
+
+<div id="loader" class="window">
+
+    <div>
+        <div id="loader-bar"></div>
+    </div>
+
+</div>
+
 <script type="text/javascript">
 
     window.CKEDITOR_BASEPATH = 'node_modules/ckeditor/';
+    var loader = require('./js/loader-bar.js');
 
-    var $ = require('jquery');
-    var jstree = require('jstree');
-    var ckeditor = require('ckeditor');
+    loader.init();
+
+    var $ = jQuery = require('jquery');
+            require('ckeditor');
+            require('./js/file-browser');
+
 
     CKEDITOR.config.customConfig = '../../js/config.js';
 
     CKEDITOR.plugins.addExternal('codemirror', '../../vendor/codemirror/');
     CKEDITOR.plugins.addExternal('sharedspace', '../../vendor/ckeditor/', 'sharedspace.js');
 
-    var instance = CKEDITOR.replace('editor');
-
-    $('#jstree_demo').jstree({
-        "core": {
-            "animation": 0,
-            "check_callback": true,
-            "themes": {},
-            'data': [
-                'Simple root node',
-                {
-                    'text': 'Root node 2',
-                    'state': {
-                        'opened': true,
-                        'selected': true
-                    },
-                    'children': [
-                        {'text': 'Child 1', type: 'file'},
-                        'Child 2'
-                    ]
-                }
-            ]
-        },
-        "types": {
-            "#": {
-                "max_children": 1,
-                "valid_children": ["root"]
-            },
-            "root": {
-                "icon": "40px.png",
-                "valid_children": ["default"]
-            },
-            "default": {
-                "valid_children": ["default", "file"],
-                icon: 'icon icon-folder'
-            },
-            "file": {
-                "icon": "icon icon-doc-text-inv",
-                "valid_children": []
-            }
-        },
-        "plugins": [
-            "contextmenu", "dnd", "search",
-            "state", "types", "wholerow", 'sort'
-        ]
+    var instance = CKEDITOR.replace('editor', {
+        startupMode: 'source',
+        codemirror: {
+            mode: 'text/javascript'
+        }
     });
+    console.log(instance);
+
+    loader.finish();
 
 </script>
 </body>

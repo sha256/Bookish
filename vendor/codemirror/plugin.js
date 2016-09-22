@@ -425,107 +425,7 @@
             // check if sourcearea plugin is overrriden
             if (!sourcearea.commands.searchCode) {
 
-                CKEDITOR.plugins.sourcearea.commands = {
-                    source: {
-                        modes: {
-                            wysiwyg: 1,
-                            source: 1
-                        },
-                        editorFocus: false,
-                        readOnly: 1,
-                        exec: function(editorInstance) {
-                            if (editorInstance.mode === 'wysiwyg') {
-                                editorInstance.fire('saveSnapshot');
-                            }
-                            editorInstance.getCommand('source').setState(CKEDITOR.TRISTATE_DISABLED);
-                            editorInstance.setMode(editorInstance.mode === 'source' ? 'wysiwyg' : 'source');
-                        },
-                        canUndo: false
-                    },
-                    searchCode: {
-                        modes: {
-                            wysiwyg: 0,
-                            source: 1
-                        },
-                        editorFocus: false,
-                        readOnly: 1,
-                        exec: function (editorInstance) {
-                            CodeMirror.commands.find(window["codemirror_" + editorInstance.id]);
-                        },
-                        canUndo: true
-                    },
-                    autoFormat: {
-                        modes: {
-                            wysiwyg: 0,
-                            source: 1
-                        },
-                        editorFocus: false,
-                        readOnly: 1,
-                        exec: function (editorInstance) {
-                            var range = {
-                                from: window["codemirror_" + editorInstance.id].getCursor(true),
-                                to: window["codemirror_" + editorInstance.id].getCursor(false)
-                            };
-                            window["codemirror_" + editorInstance.id].autoFormatRange(range.from, range.to);
-                        },
-                        canUndo: true
-                    },
-                    commentSelectedRange: {
-                        modes: {
-                            wysiwyg: 0,
-                            source: 1
-                        },
-                        editorFocus: false,
-                        readOnly: 1,
-                        exec: function (editorInstance) {
-                            var range = {
-                                from: window["codemirror_" + editorInstance.id].getCursor(true),
-                                to: window["codemirror_" + editorInstance.id].getCursor(false)
-                            };
-                            window["codemirror_" + editorInstance.id].commentRange(true, range.from, range.to);
-                        },
-                        canUndo: true
-                    },
-                    uncommentSelectedRange: {
-                        modes: {
-                            wysiwyg: 0,
-                            source: 1
-                        },
-                        editorFocus: false,
-                        readOnly: 1,
-                        exec: function (editorInstance) {
-                            var range = {
-                                from: window["codemirror_" + editorInstance.id].getCursor(true),
-                                to: window["codemirror_" + editorInstance.id].getCursor(false)
-                            };
-                            window["codemirror_" + editorInstance.id].commentRange(false, range.from, range.to);
-                            if (window["codemirror_" + editorInstance.id].config.autoFormatOnUncomment) {
-                                window["codemirror_" + editorInstance.id].autoFormatRange(
-                                    range.from,
-                                    range.to);
-                            }
-                        },
-                        canUndo: true
-                    },
-                    autoCompleteToggle: {
-                        modes: {
-                            wysiwyg: 0,
-                            source: 1
-                        },
-                        editorFocus: false,
-                        readOnly: 1,
-                        exec: function (editorInstance) {
-                            if (this.state == CKEDITOR.TRISTATE_ON) {
-                                window["codemirror_" + editorInstance.id].setOption("autoCloseTags", false);
-                            } else if (this.state == CKEDITOR.TRISTATE_OFF) {
-                                window["codemirror_" + editorInstance.id].setOption("autoCloseTags", true);
-                            }
-
-                            this.toggleState();
-                        },
-                        canUndo: true
-                    }
-                };
+                CKEDITOR.plugins.sourcearea = sourceAreaCached;
             }
 
             editor.addMode('source', function (callback) {
@@ -566,18 +466,7 @@
                 var scriptFiles = [cmBuildPath + 'codemirror.addons.min.js'];
 
                 switch (config.mode) {
-                /*case "bbcode":
-                    {
-                        scriptFiles.push(cmBuildPath + 'codemirror.mode.bbcode.min.js');
-                    }
 
-                    break;
-                case "bbcodemixed":
-                        {
-                            scriptFiles.push(cmBuildPath + 'codemirror.mode.bbcodemixed.min.js');
-                        }
-
-                        break;*/
                 case "htmlmixed":
                     {
                         scriptFiles.push(cmBuildPath + 'codemirror.mode.htmlmixed.min.js');
@@ -590,12 +479,7 @@
                     }
 
                     break;
-                case "application/x-httpd-php":
-                    {
-                        scriptFiles.push(cmBuildPath + 'codemirror.mode.php.min.js');
-                    }
 
-                    break;
                 case "text/javascript":
                     {
                         scriptFiles.push(cmBuildPath + 'codemirror.mode.javascript.min.js');
@@ -1013,7 +897,7 @@
         }
     });
 })();
-CKEDITOR.plugins.sourcearea = {
+var sourceAreaCached = {
     commands: {
         source: {
             modes: {
@@ -1158,3 +1042,6 @@ function IsStyleSheetAlreadyLoaded(href) {
 
     return false;
 }
+
+
+CKEDITOR.plugins.sourcearea = sourceAreaCached;
