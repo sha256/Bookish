@@ -47,24 +47,33 @@ li.jstree-closed > .jstree-ocl:before {
     CK Editor
 */
 
-#cke_editor {
+#main-pane {
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#editors {
+    height: 100%;
+    flex-grow: 1;
+    overflow-y: hidden;
+}
+
+#editors .cke {
     height: 100%;
 }
 
-#cke_editor .cke_inner {
+#editors .cke_inner {
     height: 100%;
     display: flex;
     flex-direction: column;
 }
 
-#cke_1_contents {
+#editors .cke_contents {
     flex-grow: 1;
 }
 
-#cke_1_resizer {
-    display: none;
-}
 
-#main-pane {
-    overflow-y: hidden;
+.cke_dialog tr:active, .cke_dialog .table-striped tr:active:nth-child(even){
+    background: none;
 }

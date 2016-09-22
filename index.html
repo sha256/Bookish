@@ -7,8 +7,6 @@
     <link rel="stylesheet" href="node_modules/jstree/dist/themes/default/style.css">
     <link rel="stylesheet" href="css/common.css">
 
-    <script type="text/javascript" src="js/config.js"></script>
-
 </head>
 <body>
 <div class="window">
@@ -18,7 +16,8 @@
     <!--<h1 class="title">Photon</h1>-->
     <!--</header>-->
 
-    <!-- Your app's content goes inside .window-content -->
+    <div id="ckToolbar"></div>
+
     <div class="window-content">
         <div class="pane-group">
             <div class="pane pane-sm sidebar">
@@ -28,7 +27,39 @@
             </div>
 
             <div class="pane" id="main-pane">
-                <textarea id="editor"></textarea>
+                <div class="tab-group">
+                    <div class="tab-item">
+                        <span class="icon icon-cancel icon-close-tab"></span>
+                        Tab
+                    </div>
+                    <div class="tab-item active">
+                        <span class="icon icon-cancel icon-close-tab"></span>
+                        Tab active
+                    </div>
+                    <div class="tab-item">
+                        <span class="icon icon-cancel icon-close-tab"></span>
+                        Tab
+                    </div>
+                    <div class="tab-item">
+                        <span class="icon icon-cancel icon-close-tab"></span>
+                        Tab
+                    </div>
+                    <div class="tab-item">
+                        <span class="icon icon-cancel icon-close-tab"></span>
+                        Tab
+                    </div>
+                    <div class="tab-item">
+                        <span class="icon icon-cancel icon-close-tab"></span>
+                        Tab
+                    </div>
+                    <div class="tab-item tab-item-fixed">
+                        <span class="icon icon-plus"></span>
+                    </div>
+                </div>
+                <div id="editors">
+                    <textarea id="editor"></textarea>
+                </div>
+
             </div>
         </div>
     </div>
@@ -42,16 +73,12 @@
     var jstree = require('jstree');
     var ckeditor = require('ckeditor');
 
-    CKEDITOR.editorConfig = function (config) {
-
-    };
+    CKEDITOR.config.customConfig = '../../js/config.js';
 
     CKEDITOR.plugins.addExternal('codemirror', '../../vendor/codemirror/');
+    CKEDITOR.plugins.addExternal('sharedspace', '../../vendor/ckeditor/', 'sharedspace.js');
 
-    CKEDITOR.replace('editor', {
-        extraPlugins: 'codemirror',
-        customConfig: ""
-    });
+    var instance = CKEDITOR.replace('editor');
 
     $('#jstree_demo').jstree({
         "core": {
