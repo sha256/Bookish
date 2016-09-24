@@ -11,7 +11,7 @@
         icons: 'searchcode,autoformat,commentselectedrange,uncommentselectedrange,autocomplete', // %REMOVE_LINE_CORE%
         version: 1.14,
         init: function (editor) {
-            console.log("DD");
+
             var rootPath = "node_modules/codemirror/",
                 defaultConfig = {
                     autoCloseBrackets: true,

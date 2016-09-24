@@ -14,11 +14,12 @@
 
     });
 
-    $fileBrowserTree.on('dblclick.jstree', '.jstree-anchor', function(e){
+    $fileBrowserTree.on('dblclick.jstree', '.jstree-wholerow, .jstree-anchor', function(e){
         var instance = $.jstree.reference(this),
         node = instance.get_node(this);
 
-        $(document).trigger('show-tab', node);
+        if (node.original.type == "file")
+            $(document).trigger('show-tab', node);
 
     });
 

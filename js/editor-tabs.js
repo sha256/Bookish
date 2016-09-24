@@ -38,7 +38,6 @@
         var $currentTab = $tabsShell.find('.chrome-tab-current');
         if ($currentTab.length) {
              var file = $currentTab[0]['data-file'];
-             console.log(file);
              if (file){
                  $editors.find('.cke').hide();
                  file.original.ckInstance.$el.show();
@@ -46,65 +45,83 @@
         }
     });
 
-    var nextInstance = createCKInstance();
-
     var $editors = $("#editors");
 
     $(document).on('show-tab', function(e, file){
 
         if (file.original.ckInstance){
-
-            chromeTabs.setCurrentTab($tabsShell, file.original.tab)
+            chromeTabs.setCurrentTab($tabsShell, file.original.tab);
+            file.original.ckInstance.$el.show();
 
         } else {
-
-            file.original.ckInstance = nextInstance;
-            nextInstance.$el  = $editors.find('.cke_editor_' + nextInstance.name);
 
             chromeTabs.addNewTab($tabsShell, {
                 //favicon: 'demo/images/eager-favicon.ico',
                 title: file.original.text
             });
 
+            $editors.find('.cke').hide(); // hide all editors
+
+            Promise.all([createCKPromised(), readFilePromisified(file.original.path)]).then(function(returned){
+                var ckInstance = returned[0];
+                ckInstance.$el  = $editors.find('.cke_editor_' + ckInstance.name).show();
+                //ckInstance.setMode("wysiwyg"); // HACK, doesn't move to source unless it's called
+                //ckInstance.setMode("source");
+                ckInstance.setData(returned[1]);
+                //nextInstance.getCommand("source").setState(CKEDITOR.TRISTATE_DISABLED);
+                file.original.ckInstance = ckInstance;
+            });
+
             file.original.tab = $tabsShell.find('.chrome-tab-current');
             file.original.tab.prop('data-file', file);
 
-
-            //// node.original -> dirTree.item
-            fs.readFile(file.original.path, 'utf8', function (err, data) {
-                if (err) throw err;
-                //nextInstance.config.codemirror.mode = 'text/html';
-                nextInstance.setMode("wysiwyg"); // HACK, doesn't move to source unless it's called
-                nextInstance.setMode("source");
-                nextInstance.setData(data);
-                setTimeout(function(){
-                    nextInstance.getCommand("source").setState(CKEDITOR.TRISTATE_DISABLED);
-                }, 1000);
-
-
-            });
-
-            setTimeout(function(){
-                nextInstance = createCKInstance();
-            }, 1100);
-
         }
-
-        $editors.find('.cke').hide();
-        file.original.ckInstance.$el.show();
 
     });
 
-    function createCKInstance(){
+    $(document).on('close-tab', function(e, $tab){
+        var file = $tab['data-file'];
+        file.original.ckInstance.destroy();
+        file.original.ckInstance = null;
+        file.original.tab = null;
+        chromeTabs.closeTab($tabsShell, $($tab));
 
-        var instance =  CKEDITOR.appendTo('editors', {
-            codemirror: {
-                mode: 'text/javascript'
-            }
-        });
+    });
 
-        return instance;
+    function readFilePromisified(filename) {
+        return new Promise(
+            function (resolve, reject) {
+                fs.readFile(filename, {encoding: 'utf8'},
+                    (error, data) => {
+                        if (error) {
+                            reject(error);
+                        } else {
+                            console.log('read data');
+                            resolve(data);
+                        }
+                    });
+            });
     }
 
+    function createCKPromised() {
+        return new Promise(
+            function (resolve, reject) {
+
+                var instance = CKEDITOR.appendTo('editors', {
+                    startupMode: 'source',
+                    codemirror: {
+                        mode: 'text/javascript'
+                    }
+                });
+
+                instance.on('instanceReady', function () {
+                    console.log('created instance');
+                    resolve(instance);
+                });
+
+            }
+        );
+    }
 
 })();
+
