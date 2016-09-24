@@ -6,10 +6,6 @@ var gulp  = require('gulp'),
 
 var codeMirrorBuildConfig = require('./tools/code_mirror_build_config.js');
 
-gulp.task('clean', function () {
-    return del('static/build/pms/**/*.*');
-});
-
 
 gulp.task('codemirror-build', [], function () {
 

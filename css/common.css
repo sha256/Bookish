@@ -100,3 +100,20 @@ li.jstree-closed > .jstree-ocl:before {
   min-height: 200px;
   cursor: col-resize;
 }
+
+.chrome-tabs-shell {
+    padding: 5px;
+    border-radius: 0;
+    z-index: 100;
+}
+
+/** All CKS hidden initially */
+
+#editors .cke {
+    display: none;
+}
+
+/*** Tabs shows over the loader, hide them ***/
+#loader {
+    z-index: 9999;
+}

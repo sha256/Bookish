@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="vendor/photon/css/photon.css">
 
     <link rel="stylesheet" href="node_modules/jstree/dist/themes/default/style.css">
+    <link rel="stylesheet" href="node_modules/chrome-tabs/css/chrome-tabs.css">
     <link rel="stylesheet" href="css/scrollbars.css">
     <link rel="stylesheet" href="css/common.css">
 
@@ -27,37 +28,13 @@
                 </div>
             </div>
             <div class="pane" id="main-pane">
-                <div class="tab-group">
-                    <div class="tab-item">
-                        <span class="icon icon-cancel icon-close-tab"></span>
-                        Tab
+                <div class="chrome-tabs-shell">
+                    <div class="chrome-tabs">
                     </div>
-                    <div class="tab-item active">
-                        <span class="icon icon-cancel icon-close-tab"></span>
-                        Tab active
-                    </div>
-                    <div class="tab-item">
-                        <span class="icon icon-cancel icon-close-tab"></span>
-                        Tab
-                    </div>
-                    <div class="tab-item">
-                        <span class="icon icon-cancel icon-close-tab"></span>
-                        Tab
-                    </div>
-                    <div class="tab-item">
-                        <span class="icon icon-cancel icon-close-tab"></span>
-                        Tab
-                    </div>
-                    <div class="tab-item">
-                        <span class="icon icon-cancel icon-close-tab"></span>
-                        Tab
-                    </div>
-                    <div class="tab-item tab-item-fixed">
-                        <span class="icon icon-plus"></span>
-                    </div>
+                    <!--<div class="chrome-shell-bottom-bar"></div>-->
                 </div>
                 <div id="editors">
-                    <textarea id="editor"></textarea>
+
                 </div>
 
             </div>
@@ -74,6 +51,8 @@
 
 </div>
 
+<div id="hidden-ck" style="display: none"></div>
+
 <script type="text/javascript">
 
     window.CKEDITOR_BASEPATH = 'node_modules/ckeditor/';
@@ -82,7 +61,9 @@
     loader.init();
 
     var $ = jQuery = require('jquery');
+            require('./vendor/jquery-ui.min.js');
             require('ckeditor');
+            require('chrome-tabs');
             require('./js/file-browser');
 
 
@@ -91,12 +72,18 @@
     CKEDITOR.plugins.addExternal('codemirror', '../../vendor/codemirror/');
     CKEDITOR.plugins.addExternal('sharedspace', '../../vendor/ckeditor/', 'sharedspace.js');
 
-    var instance = CKEDITOR.replace('editor', {
-        startupMode: 'source',
-        codemirror: {
-            mode: 'text/javascript'
-        }
+    var instance = CKEDITOR.appendTo('hidden-ck', {startupMode: "none"});
+
+
+    CKEDITOR.on('instanceReady', function(a, b, c){
+        console.log(a, b, c);
     });
+
+    // pre init another CK inside
+    require('./js/editor-tabs');
+
+    //CKEDITOR.instances.editor2.execCommand("source"); // switch mode
+
     console.log(instance);
 
     loader.finish();

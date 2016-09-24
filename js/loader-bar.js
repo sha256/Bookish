@@ -19,17 +19,17 @@
     module.exports = {
         init: function(){
             var runner = setInterval(function(){
-                run(70, runner);
-            }, 50);
+                run(60, runner);
+            }, 10);
         },
 
         finish: function(){
-            width = 70;
+            width = 60;
             var runner = setInterval(function(){
                run(100, runner, function(){
                    loader.style.display = 'none';
                });
-            }, 10);
+            }, 100);
         }
     }
 

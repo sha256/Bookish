@@ -11,6 +11,7 @@
         icons: 'searchcode,autoformat,commentselectedrange,uncommentselectedrange,autocomplete', // %REMOVE_LINE_CORE%
         version: 1.14,
         init: function (editor) {
+            console.log("DD");
             var rootPath = "node_modules/codemirror/",
                 defaultConfig = {
                     autoCloseBrackets: true,
@@ -464,7 +465,7 @@
             function getCodeMirrorScripts() {
                 var cmBuildPath = "build/js/codemirror/";
                 var scriptFiles = [cmBuildPath + 'codemirror.addons.min.js'];
-
+console.log("getting cm scripts");
                 switch (config.mode) {
 
                 case "htmlmixed":
