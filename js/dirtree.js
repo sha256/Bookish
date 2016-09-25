@@ -16,7 +16,7 @@ function directoryTree (path, extensions) {
 	catch (e) { return null; }
 
 	if (stats.isFile()) {
-		const ext = PATH.extname(path).toLowerCase();
+		const ext = PATH.extname(path).toLowerCase().substring(1);
 		if (extensions && extensions.length && extensions.indexOf(ext) === -1) return null;
 		item.size = stats.size;  // File size in bytes
 		item.extension = ext;

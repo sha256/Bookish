@@ -13,10 +13,36 @@
 <body>
 <div class="window">
 
-    <!-- .toolbar-header sits at the top of your app -->
-    <!--<header class="toolbar toolbar-header">-->
-    <!--<h1 class="title">Photon</h1>-->
-    <!--</header>-->
+    <header class="toolbar toolbar-header">
+        <div class="toolbar-actions">
+            <div class="btn-group">
+                <button class="btn btn-default">
+                    <span class="icon icon-home"></span>
+                </button>
+                <button class="btn btn-default">
+                    <span class="icon icon-folder"></span>
+                </button>
+                <button class="btn btn-default active">
+                    <span class="icon icon-cloud"></span>
+                </button>
+                <button class="btn btn-default">
+                    <span class="icon icon-popup"></span>
+                </button>
+                <button class="btn btn-default">
+                    <span class="icon icon-shuffle"></span>
+                </button>
+            </div>
+
+            <button class="btn btn-default">
+                <span class="icon icon-home icon-text"></span>
+                Filters
+            </button>
+
+            <button class="btn btn-default btn-dropdown pull-right">
+                <span class="icon icon-megaphone"></span>
+            </button>
+        </div>
+    </header>
 
     <div id="ckToolbar"></div>
 
@@ -67,7 +93,7 @@
             require('./js/file-browser');
 
 
-    CKEDITOR.config.customConfig = '../../js/config.js';
+    CKEDITOR.config.customConfig = '../../js/ck-config.js';
 
     CKEDITOR.plugins.addExternal('codemirror', '../../vendor/codemirror/');
     CKEDITOR.plugins.addExternal('sharedspace', '../../vendor/ckeditor/', 'sharedspace.js');
@@ -75,14 +101,7 @@
     var instance = CKEDITOR.appendTo('hidden-ck', {startupMode: "none"});
 
 
-//    CKEDITOR.on('instanceReady', function(a, b, c){
-//        console.log(a, b, c);
-//    });
-
-    // pre init another CK inside
     require('./js/editor-tabs');
-
-    //CKEDITOR.instances.editor2.execCommand("source"); // switch mode
 
     console.log(instance);
 

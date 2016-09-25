@@ -1,31 +1,10 @@
 (function(){
 
-    var ext = {
-       css: {
-          cmMode: 'text/css',
-          sourceOnly: true
-       },
-       js: {
-          cmMode: 'text/javascript',
-          sourceOnly: true
-       },
-       txt: {
-          cmMode: 'text/javascript',
-          sourceOnly: true
-       },
-       html: {
-          cmMode: 'text/html',
-          sourceOnly: false
-       },
-       xhtml: {
-          cmMode: 'text/html',
-          sourceOnly: true
-       }
-    };
-
     const {ipcRenderer} = require('electron');
     var $tabsShell = $('.chrome-tabs-shell');
     var fs = require('fs');
+    var extensions = require('./file-extensions');
+    var $ckToolbar = $('#ckToolbar');
 
     chromeTabs.init({
         $shell: $tabsShell,
@@ -39,9 +18,12 @@
         if ($currentTab.length) {
              var file = $currentTab[0]['data-file'];
              if (file){
-                 $editors.find('.cke').hide();
+                 $('.cke').hide();
                  file.original.ckInstance.$el.show();
              }
+        }
+        if ($ckToolbar.find('.cke').length < 2){
+            $ckToolbar.find('.cke_editor_editor1').show();
         }
     });
 
@@ -49,7 +31,9 @@
 
     $(document).on('show-tab', function(e, file){
 
+        // already in the tabs, just show it
         if (file.original.ckInstance){
+
             chromeTabs.setCurrentTab($tabsShell, file.original.tab);
             file.original.ckInstance.$el.show();
 
@@ -60,16 +44,18 @@
                 title: file.original.text
             });
 
-            $editors.find('.cke').hide(); // hide all editors
-
-            Promise.all([createCKPromised(), readFilePromisified(file.original.path)]).then(function(returned){
+            Promise.all([createCKPromised(file), readFilePromisified(file.original.path)]).then(function(returned){
                 var ckInstance = returned[0];
-                ckInstance.$el  = $editors.find('.cke_editor_' + ckInstance.name).show();
-                //ckInstance.setMode("wysiwyg"); // HACK, doesn't move to source unless it's called
-                //ckInstance.setMode("source");
+                $('.cke').hide();
+                ckInstance.$el  = $('.cke_editor_' + ckInstance.name).show();
                 ckInstance.setData(returned[1]);
-                //nextInstance.getCommand("source").setState(CKEDITOR.TRISTATE_DISABLED);
+
+                if(extensions[file.original.extension].sourceOnly){
+                    ckInstance.getCommand("source").setState(CKEDITOR.TRISTATE_DISABLED)
+                }
+
                 file.original.ckInstance = ckInstance;
+                ckInstance.resetDirty();
             });
 
             file.original.tab = $tabsShell.find('.chrome-tab-current');
@@ -103,18 +89,18 @@
             });
     }
 
-    function createCKPromised() {
+    function createCKPromised(file) {
         return new Promise(
             function (resolve, reject) {
 
                 var instance = CKEDITOR.appendTo('editors', {
-                    startupMode: 'source',
+                    startupMode: extensions[file.original.extension].startupMode,
                     codemirror: {
-                        mode: 'text/javascript'
+                        mode: extensions[file.original.extension].cmMode
                     }
                 });
 
-                instance.on('instanceReady', function () {
+                instance.on('instanceReady', function (e) {
                     console.log('created instance');
                     resolve(instance);
                 });
