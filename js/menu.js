@@ -10,8 +10,17 @@ const template = [
                     require('electron').dialog.showOpenDialog({
                         properties: ['openFile', 'openDirectory']
                     }, function (files) {
-                        if (files)
-                            windowRef.webContents.send('file-opened', files)
+                        var fs = require('fs');
+                        if (fs.statSync(files[0]).isDirectory()){
+                            require('electron').app.emit('file-selected', files[0], false);
+                        } else {
+                            if (files[0].endsWith(".epub"))
+                                require('electron').app.emit('file-selected', files[0], true);
+                            else
+                                require('electron').dialog.
+                                showErrorBox('Unsupported Choice', 'Select a folder or an epub file')
+                        }
+
                     });
 
 
@@ -191,17 +200,12 @@ if (process.platform === 'darwin') {
     ]
 }
 
-var windowRef;
-
 module.exports = {
 
     init: function(){
         const {Menu} = require('electron');
         const menu = Menu.buildFromTemplate(template);
         Menu.setApplicationMenu(menu);
-    },
-    setWindow: function(win){
-        windowRef = win;
     }
 
 };

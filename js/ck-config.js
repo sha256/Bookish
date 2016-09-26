@@ -4,6 +4,7 @@ CKEDITOR.editorConfig = function(cf){
     cf.extraPlugins= 'codemirror,sharedspace';
     cf.sharedSpaces = { top: 'ckToolbar'};
     cf.height = "100%";
+	cf.fullPage = true;
 
     cf.toolbarGroups = [
 		{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },

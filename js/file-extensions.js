@@ -9,6 +9,21 @@ module.exports =  {
       cmMode: 'text/javascript',
       sourceOnly: true
    },
+   xml: {
+      startupMode: 'source',
+      cmMode: 'application/xml',
+      sourceOnly: true
+   },
+   ncx: {
+      startupMode: 'source',
+      cmMode: 'application/xml',
+      sourceOnly: true
+   },
+   opf: {
+      startupMode: 'source',
+      cmMode: 'application/xml',
+      sourceOnly: true
+   },
    txt: {
       startupMode: 'source',
       cmMode: 'text/javascript',

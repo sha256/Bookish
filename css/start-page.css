@@ -1,0 +1,45 @@
+#main {
+    flex-direction: column !important;
+    text-align: center;
+}
+
+.recent-list {
+    text-align: left;
+    font-size: 14px;
+    font-family: LiberianSans;
+    list-style: none;
+    padding: 0;
+}
+
+.recent-list li p {
+    margin: 0 18px;
+    color: #D3D3E5;
+}
+
+.recent-list li {
+    border-bottom: 1px solid darkgray;
+    cursor: pointer;
+    padding: 6px 16px;
+}
+.recent-list li:last-child {
+    border: none;
+}
+
+.recent-list li:hover {
+    background: darkgray;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.recent-list li * {
+    cursor: pointer;
+}
+
+h1 {
+    margin-top: 0px;
+    margin-bottom: -10px;
+}
+
+#sidebar {
+    overflow: hidden;
+}

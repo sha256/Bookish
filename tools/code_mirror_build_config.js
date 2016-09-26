@@ -14,6 +14,18 @@ var hoo = {
             ],
         dest: 'codemirror.mode.htmlmixed.min.js'
     },
+    modeCss: {
+        src: [
+            'node_modules/codemirror/mode/css/css.js'
+        ],
+        dest: 'codemirror.mode.css.min.js'
+    },
+    modeXml: {
+        src: [
+            'node_modules/codemirror/mode/xml/xml.js'
+        ],
+        dest: 'codemirror.mode.xml.min.js'
+    },
     modeJs: {
         src: ['node_modules/codemirror/mode/javascript/javascript.js'],
         dest: 'codemirror.mode.javascript.min.js'

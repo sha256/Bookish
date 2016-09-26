@@ -1,0 +1,9 @@
+@font-face {
+    font-family: LiberianSans;
+    src: url('./../fonts/LiberationSans-Regular.ttf');
+}
+
+.CodeMirror {
+    font-family: LiberianSans !important;
+    font-size: 13pt;
+}

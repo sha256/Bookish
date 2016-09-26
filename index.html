@@ -6,43 +6,16 @@
 
     <link rel="stylesheet" href="node_modules/jstree/dist/themes/default/style.css">
     <link rel="stylesheet" href="node_modules/chrome-tabs/css/chrome-tabs.css">
+
+
     <link rel="stylesheet" href="css/scrollbars.css">
+    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/common.css">
+
 
 </head>
 <body>
 <div class="window">
-
-    <header class="toolbar toolbar-header">
-        <div class="toolbar-actions">
-            <div class="btn-group">
-                <button class="btn btn-default">
-                    <span class="icon icon-home"></span>
-                </button>
-                <button class="btn btn-default">
-                    <span class="icon icon-folder"></span>
-                </button>
-                <button class="btn btn-default active">
-                    <span class="icon icon-cloud"></span>
-                </button>
-                <button class="btn btn-default">
-                    <span class="icon icon-popup"></span>
-                </button>
-                <button class="btn btn-default">
-                    <span class="icon icon-shuffle"></span>
-                </button>
-            </div>
-
-            <button class="btn btn-default">
-                <span class="icon icon-home icon-text"></span>
-                Filters
-            </button>
-
-            <button class="btn btn-default btn-dropdown pull-right">
-                <span class="icon icon-megaphone"></span>
-            </button>
-        </div>
-    </header>
 
     <div id="ckToolbar"></div>
 
@@ -103,9 +76,9 @@
 
     require('./js/editor-tabs');
 
-    console.log(instance);
-
-    loader.finish();
+    require('electron').ipcRenderer.on('editor-ready', function(){
+       loader.finish();
+    });
 
 </script>
 </body>

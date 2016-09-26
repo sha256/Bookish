@@ -5,13 +5,9 @@
     var jsTree = require('jstree');
     const {ipcRenderer} = require('electron');
 
-    ipcRenderer.on('file-opened', function(e, file){
-
-        var dirTree = require('./dirtree.js');
-        var tree = dirTree(file[0]);
+    ipcRenderer.on('editor-data-ready', function(e, tree){
         showFileBrowserTree($fileBrowserTree, tree);
-
-
+        ipcRenderer.emit('editor-ready');
     });
 
     $fileBrowserTree.on('dblclick.jstree', '.jstree-wholerow, .jstree-anchor', function(e){

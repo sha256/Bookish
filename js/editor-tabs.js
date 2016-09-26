@@ -95,6 +95,7 @@
 
                 var instance = CKEDITOR.appendTo('editors', {
                     startupMode: extensions[file.original.extension].startupMode,
+                    //baseHref: "/Users/sha256/Projects/HTML/eakash4/",
                     codemirror: {
                         mode: extensions[file.original.extension].cmMode
                     }

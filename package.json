@@ -27,6 +27,7 @@
     "gulp-uglify": "^2.0.0",
     "gulp-util": "^3.0.7",
     "js-beautify": "^1.6.4",
-    "jstree": "^3.3.2"
+    "jstree": "^3.3.2",
+    "sql.js": "^0.3.2"
   }
 }

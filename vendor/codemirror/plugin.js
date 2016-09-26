@@ -36,8 +36,9 @@
                     showTrailingSpace: true,
                     showUncommentButton: true,
                     styleActiveLine: true,
-                    theme: 'default',
-                    useBeautify: false
+                    theme: 'monokai',
+                    useBeautify: false,
+                    indentUnit: 4
                 };
             
             // Get Config & Lang
@@ -468,24 +469,25 @@
 console.log("getting cm scripts");
                 switch (config.mode) {
 
-                case "htmlmixed":
-                    {
+                case "htmlmixed": {
                         scriptFiles.push(cmBuildPath + 'codemirror.mode.htmlmixed.min.js');
                     }
-
                     break;
-                case "text/html":
-                    {
+                case "text/html": {
                         scriptFiles.push(cmBuildPath + 'codemirror.mode.htmlmixed.min.js');
                     }
-
                     break;
-
-                case "text/javascript":
-                    {
+                case "text/javascript": {
                         scriptFiles.push(cmBuildPath + 'codemirror.mode.javascript.min.js');
                     }
-
+                    break;
+                case "text/css": {
+                        scriptFiles.push(cmBuildPath + 'codemirror.mode.css.min.js');
+                    }
+                    break;
+                case "application/xml": {
+                        scriptFiles.push(cmBuildPath + 'codemirror.mode.xml.min.js');
+                    }
                     break;
                 default:
                     scriptFiles.push(cmBuildPath + 'codemirror.mode.htmlmixed.min.js');
