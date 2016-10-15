@@ -1,7 +1,11 @@
 var {BrowserWindow} = require('electron');
 var Zip = require('adm-zip');
 var dirTree = require('./../vendor/dirtree.js');
-var appDataFolder = require('electron').app.getPath('appData');
+var appDataFolder = require('electron').app.getPath('appData') + '/Bookish';
+var path = require('path');
+var Datastore = require('nedb');
+var sha1 = require('sha1');
+var db = new Datastore({ filename: appDataFolder + '/bookish.db', autoload: true });
 
 
 function openEditorWindowPromised(){
@@ -31,26 +35,45 @@ function openEditorWindowPromised(){
     });
 }
 
-function prepareFileOrFolderPromised(file, isEpub){
+function prepareFileOrFolderPromised(file, isDir){
 
     return new Promise(function(resolve, reject){
 
+        var hash = sha1(file);
         var folder = file;
 
-        if (isEpub){
-            var zip = new Zip(file);
-            folder = appDataFolder + "/newpub";
-            console.log(folder);
-            zip.extractAllTo(folder, true)
+        db.findOne({hash: hash}, function (err, doc) {
+            console.log(doc);
+            if (doc == null){
+                if (!isDir) {
+                    var zip = new Zip(file);
+                    folder = appDataFolder + "/extracted/" + hash;
+                    console.log('extracted to ', folder);
+                    zip.extractAllTo(folder, true)
+                }
+                var newDoc = {
+                    hash: hash,
+                    file: file,
+                    folder: folder,
+                    dir: isDir,
+                    title: path.posix.basename(file),
+                    time: new Date().getTime()
+                };
 
-        } else {
+                db.insert(newDoc, function(err, newDoc){});
 
-        }
+                resolve({ dir: folder, tree: dirTree(folder), doc: newDoc});
 
-        resolve({
-           dir: folder,
-           tree: dirTree(folder)
+            } else {
+                db.update({hash: hash}, {$set: {time: new Date().getTime()}}, {});
+                resolve({ dir: doc.folder, tree: dirTree(doc.folder), doc: doc});
+            }
+
+
         });
+
+
+
 
     });
 

@@ -15,27 +15,7 @@
 
         <div class="pane-group">
             <div class="pane pane-sm sidebar" id="sidebar">
-                <ul class="recent-list">
-                    <li>
-                        <i class="icon icon-folder"></i> <span>Simple Epub</span>
-                        <p>/Users/Sha245/Shamimddddd</p>
-                    </li>
-                    <li>
-                        <i class="icon icon-folder"></i> <span>Simple Epub</span>
-                        <p>/Users/Sha245/Shamimddddd</p>
-                    </li>
-                    <li>
-                        <i class="icon icon-folder"></i> <span>Simple Epub</span>
-                        <p>/Users/Sha245/Shamimddddd</p>
-                    </li>
-                    <li>
-                        <i class="icon icon-doc-text-inv"></i> <span>Simple Epub</span>
-                        <p>/Users/Sha245/Shamimddddd</p>
-                    </li>
-                    <li>
-                        <i class="icon icon-doc-text-inv"></i> <span>Simple Epub</span>
-                        <p>/Users/Sha245/Shamimddddd</p>
-                    </li>
+                <ul class="recent-list" id="recent-list">
 
                 </ul>
             </div>
@@ -47,8 +27,31 @@
 
 </div>
 
-<script type="text/javascript">
+<script type="dot/template" id="recentTpl">
+   {{~it.items :each:i}}
+   <li data-file="{{=each.file}}" data-dir="{{=each.dir}}">
+       <i class="icon icon-{{?each.dir}}folder{{??}}doc{{?}}"></i> <span>{{=each.title}}</span>
+       <p>{{=each.file}}</p>
+   </li>
+   {{~}}
+</script>
 
+<script type="text/javascript">
+    var $ = jQuery = require('jquery');
+    var appDataFolder = require('electron').remote.app.getPath('appData') + '/Bookish';
+    var Datastore = require('nedb');
+    var db = new Datastore({filename: appDataFolder + '/bookish.db', autoload: true});
+    var doT = require('./vendor/doT.min');
+    var tpl = doT.template($('#recentTpl').html());
+
+    db.find({}).sort({ time: -1 }).exec(function (err, docs) {
+
+        $("#recent-list").html(tpl({items: docs})).on('click', 'li', function(){
+            var data = $(this).data();
+            require('electron').remote.app.emit('file-selected', data.file, data.dir);
+        });
+
+    });
 
 </script>
 </body>

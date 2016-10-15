@@ -12,10 +12,10 @@ const template = [
                     }, function (files) {
                         var fs = require('fs');
                         if (fs.statSync(files[0]).isDirectory()){
-                            require('electron').app.emit('file-selected', files[0], false);
+                            require('electron').app.emit('file-selected', files[0], true);
                         } else {
                             if (files[0].endsWith(".epub"))
-                                require('electron').app.emit('file-selected', files[0], true);
+                                require('electron').app.emit('file-selected', files[0], false);
                             else
                                 require('electron').dialog.
                                 showErrorBox('Unsupported Choice', 'Select a folder or an epub file')

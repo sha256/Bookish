@@ -29,16 +29,20 @@ app.on('ready', function () {
  * A folder or epub file is selected using Open menu.
  * create a new editor window.
  */
-app.on('file-selected', function(file, isEpub, e){
+app.on('file-selected', function(file, isDir, e){
+
+    // check if it's an epub, if it is check if it was opened previously
+    // and load the extracted folder instead
 
     Promise.all([
         windowInit.openEditorWindowPromised(),
-        windowInit.prepareFileOrFolderPromised(file, isEpub)
+        windowInit.prepareFileOrFolderPromised(file, isDir)
     ]).then(function(result){
 
         var window = result[0];
         var fileInfo = result[1];
 
+        // received in file-browser.js
         window.webContents.send('editor-data-ready', fileInfo.tree);
 
         if (startWindow != null) {
