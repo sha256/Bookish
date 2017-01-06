@@ -40,7 +40,9 @@ app.on('file-selected', function(file, isDir, e){
     ]).then(function(result){
 
         var window = result[0];
-        var fileInfo = result[1];
+        var fileInfo = result[1]; // {dir: .., tree: .., doc: ..}
+
+        fileInfo.tree.text = fileInfo.doc.title;
 
         // received in file-browser.js
         window.webContents.send('editor-data-ready', fileInfo.tree);

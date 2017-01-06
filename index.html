@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="node_modules/jstree/dist/themes/default/style.css">
     <link rel="stylesheet" href="node_modules/chrome-tabs/css/chrome-tabs.css">
 
+    <link rel="stylesheet" href="vendor/jquery-ui.min.css">
+
 
     <link rel="stylesheet" href="css/scrollbars.css">
     <link rel="stylesheet" href="css/fonts.css">
@@ -79,6 +81,13 @@
     require('electron').ipcRenderer.on('editor-ready', function(){
        loader.finish();
     });
+
+    var contextMenu = require('./js/context-menu');
+    contextMenu.init();
+
+//    $("#sidebar").resizable({
+//        handles: 'e'
+//    });
 
 </script>
 </body>
